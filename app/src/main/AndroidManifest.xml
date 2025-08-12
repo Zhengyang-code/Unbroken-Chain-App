@@ -23,15 +23,15 @@
         </activity>
         
         <activity
-            android:name=".CalendarViewActivity"
+            android:name=".activities.CalendarViewActivity"
             android:exported="false" />
             
         <activity
-            android:name=".MonthsViewActivity"
+            android:name=".activities.MonthsViewActivity"
             android:exported="false" />
             
         <activity
-            android:name=".SummaryGraphActivity"
+            android:name=".activities.SummaryGraphActivity"
             android:exported="false" />
             
         <activity
