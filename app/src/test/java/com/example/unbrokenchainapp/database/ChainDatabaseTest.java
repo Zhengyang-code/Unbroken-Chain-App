@@ -106,10 +106,7 @@ public class ChainDatabaseTest {
         assertEquals("Chain ID should remain", 1L, chain.getId());
         assertEquals("Chain name should remain", "Chain to Delete", chain.getName());
     }
-    
-    /**
-     * Test adding a habit entry
-     */
+
     @Test
     public void testAddEntry() {
         // Test entry creation without database
@@ -128,10 +125,7 @@ public class ChainDatabaseTest {
         assertTrue("Entry should be marked as completed", entry.isCompleted());
         assertEquals("Entry ID should be set", 1L, entry.getId());
     }
-    
-    /**
-     * Test updating a habit entry
-     */
+
     @Test
     public void testUpdateEntry() {
         // Test entry update operations without database
@@ -148,10 +142,7 @@ public class ChainDatabaseTest {
         assertEquals("Entry chain ID should remain the same", 1L, entry.getChainId());
         assertEquals("Entry date should remain the same", today, entry.getDate());
     }
-    
-    /**
-     * Test toggling entry status
-     */
+
     @Test
     public void testToggleEntry() {
         // Test entry toggle logic without database
@@ -170,10 +161,7 @@ public class ChainDatabaseTest {
         assertEquals("Entry ID should remain the same", 1L, entry.getId());
         assertEquals("Entry chain ID should remain the same", 1L, entry.getChainId());
     }
-    
-    /**
-     * Test getting monthly entries
-     */
+
     @Test
     public void testGetEntriesForMonth() {
         // Test monthly entries logic without database
@@ -197,10 +185,7 @@ public class ChainDatabaseTest {
         assertTrue("First entry should be completed", entries.get(0).isCompleted());
         assertFalse("Second entry should not be completed", entries.get(1).isCompleted());
     }
-    
-    /**
-     * Test complete CRUD workflow
-     */
+
     @Test
     public void testCompleteCRUDWorkflow() {
         // 1. Create a chain

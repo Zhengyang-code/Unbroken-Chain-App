@@ -13,19 +13,13 @@ public class ChainTest extends TestCase {
         super.setUp();
         chain = new Chain();
     }
-    
-    /**
-     * Test default constructor
-     */
+
     public void testDefaultConstructor() {
         assertNotNull("Chain object should be created", chain);
         assertTrue("Newly created chain should be active", chain.isActive());
         assertNotNull("Created time should be set", chain.getCreatedAt());
     }
-    
-    /**
-     * Test parameterized constructor
-     */
+
     public void testParameterizedConstructor() {
         String name = "Test Habit";
         String description = "This is a test habit";
@@ -36,46 +30,31 @@ public class ChainTest extends TestCase {
         assertTrue("Newly created chain should be active", testChain.isActive());
         assertNotNull("Created time should be set", testChain.getCreatedAt());
     }
-    
-    /**
-     * Test ID getter and setter
-     */
+
     public void testIdGetterAndSetter() {
         long testId = 12345L;
         chain.setId(testId);
         assertEquals("ID should be set and retrieved correctly", testId, chain.getId());
     }
-    
-    /**
-     * Test name getter and setter
-     */
+
     public void testNameGetterAndSetter() {
         String testName = "Daily Exercise";
         chain.setName(testName);
         assertEquals("Name should be set and retrieved correctly", testName, chain.getName());
     }
-    
-    /**
-     * Test description getter and setter
-     */
+
     public void testDescriptionGetterAndSetter() {
         String testDescription = "Run for 30 minutes daily";
         chain.setDescription(testDescription);
         assertEquals("Description should be set and retrieved correctly", testDescription, chain.getDescription());
     }
-    
-    /**
-     * Test created time getter and setter
-     */
+
     public void testCreatedAtGetterAndSetter() {
         Date testDate = new Date();
         chain.setCreatedAt(testDate);
         assertEquals("Created time should be set and retrieved correctly", testDate, chain.getCreatedAt());
     }
-    
-    /**
-     * Test active status getter and setter
-     */
+
     public void testActiveGetterAndSetter() {
         // Test setting to inactive
         chain.setActive(false);
@@ -85,10 +64,7 @@ public class ChainTest extends TestCase {
         chain.setActive(true);
         assertTrue("Active status should be set to true correctly", chain.isActive());
     }
-    
-    /**
-     * Test complete object creation and property setting
-     */
+
     public void testCompleteChainObject() {
         long id = 1L;
         String name = "Learn Programming";

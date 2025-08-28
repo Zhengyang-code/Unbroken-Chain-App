@@ -9,19 +9,13 @@ import java.util.Date;
 import java.util.List;
 
 public class StreakCalculatorTest extends TestCase {
-    
-    /**
-     * Test current streak calculation with empty list
-     */
+
     public void testCalculateCurrentStreakEmptyList() {
         List<ChainEntry> entries = new ArrayList<>();
         int streak = StreakCalculator.calculateCurrentStreak(entries);
         assertEquals("Empty list should return 0", 0, streak);
     }
-    
-    /**
-     * Test current streak calculation with no completed entries
-     */
+
     public void testCalculateCurrentStreakNoCompletedEntries() {
         List<ChainEntry> entries = new ArrayList<>();
         
@@ -36,10 +30,7 @@ public class StreakCalculatorTest extends TestCase {
         int streak = StreakCalculator.calculateCurrentStreak(entries);
         assertEquals("No completed entries should return 0", 0, streak);
     }
-    
-    /**
-     * Test current streak calculation with completed entries
-     */
+
     public void testCalculateCurrentStreakWithCompletedEntries() {
         List<ChainEntry> entries = new ArrayList<>();
         
@@ -67,10 +58,7 @@ public class StreakCalculatorTest extends TestCase {
         int streak = StreakCalculator.calculateCurrentStreak(entries);
         assertEquals("Should have 3 days streak", 3, streak);
     }
-    
-    /**
-     * Test current streak calculation with gap
-     */
+
     public void testCalculateCurrentStreakWithGap() {
         List<ChainEntry> entries = new ArrayList<>();
         
@@ -90,19 +78,13 @@ public class StreakCalculatorTest extends TestCase {
         int streak = StreakCalculator.calculateCurrentStreak(entries);
         assertEquals("Should have only 1 day streak after gap", 1, streak);
     }
-    
-    /**
-     * Test longest streak calculation with empty list
-     */
+
     public void testCalculateLongestStreakEmptyList() {
         List<ChainEntry> entries = new ArrayList<>();
         int streak = StreakCalculator.calculateLongestStreak(entries);
         assertEquals("Empty list should return 0", 0, streak);
     }
-    
-    /**
-     * Test longest streak calculation
-     */
+
     public void testCalculateLongestStreak() {
         List<ChainEntry> entries = new ArrayList<>();
         
@@ -129,10 +111,7 @@ public class StreakCalculatorTest extends TestCase {
         int longestStreak = StreakCalculator.calculateLongestStreak(entries);
         assertEquals("Longest streak should be 5", 5, longestStreak);
     }
-    
-    /**
-     * Test monthly streak calculation
-     */
+
     public void testCalculateMonthlyStreak() {
         List<ChainEntry> entries = new ArrayList<>();
         
@@ -162,10 +141,7 @@ public class StreakCalculatorTest extends TestCase {
         int monthlyStreak = StreakCalculator.calculateMonthlyStreak(entries, currentYear, currentMonth);
         assertEquals("Monthly longest streak should be 5", 5, monthlyStreak);
     }
-    
-    /**
-     * Test streak calculation with different chains
-     */
+
     public void testCalculateStreakDifferentChains() {
         List<ChainEntry> entries = new ArrayList<>();
         
@@ -186,10 +162,7 @@ public class StreakCalculatorTest extends TestCase {
         int streak = StreakCalculator.calculateCurrentStreak(entries);
         assertEquals("Should only calculate streak for chain 1", 2, streak);
     }
-    
-    /**
-     * Test edge case: only today's entry
-     */
+
     public void testCalculateStreakOnlyToday() {
         List<ChainEntry> entries = new ArrayList<>();
         
@@ -200,10 +173,7 @@ public class StreakCalculatorTest extends TestCase {
         int streak = StreakCalculator.calculateCurrentStreak(entries);
         assertEquals("Only today completed should return 1", 1, streak);
     }
-    
-    /**
-     * Test edge case: only yesterday's entry
-     */
+
     public void testCalculateStreakOnlyYesterday() {
         List<ChainEntry> entries = new ArrayList<>();
         
@@ -215,10 +185,7 @@ public class StreakCalculatorTest extends TestCase {
         int streak = StreakCalculator.calculateCurrentStreak(entries);
         assertEquals("Only yesterday completed should return 0", 0, streak);
     }
-    
-    /**
-     * Test complex scenario: multiple breaks and streaks
-     */
+
     public void testCalculateStreakComplexScenario() {
         List<ChainEntry> entries = new ArrayList<>();
         
