@@ -5,14 +5,14 @@ A simple and effective Android application for tracking daily habits and buildin
 ## How to use
 
 ### main page
-![main page](./HowToUse/main%20page.png)
-click Manage Chains go into Chain setting page
-### manage page
-![manage page](./HowToUse/manage%20page.png)
-then click add chain button to add a new chain
-![add](./HowToUse/add.png)
-click view calendar check records
-![view calendar](./HowToUse/view%20calendar.png)
+<img src="./HowToUse/main%20page.png" width="300" height="600">
+<p>click Manage Chains go into Chain setting page</p>
+<h2>manage page</h2>
+<img src="./HowToUse/manage%20page.png" width="300" height="600">
+<p>then click add chain button to add a new chain</p>
+<img src="./HowToUse/add.png" width="300" height="600">
+<p>click view calendar check records</p>
+<img src="./HowToUse/view%20calendar.png" width="300" height="600">
 
 ## Features
 
