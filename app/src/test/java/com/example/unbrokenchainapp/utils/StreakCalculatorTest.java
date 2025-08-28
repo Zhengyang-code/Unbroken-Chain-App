@@ -219,4 +219,66 @@ public class StreakCalculatorTest extends TestCase {
         assertEquals("Current streak should be 3", 3, currentStreak);
         assertEquals("Longest streak should be 4", 4, longestStreak);
     }
+
+    public void testLeapYearFebruaryDays() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, 2024); // 闰年
+        cal.set(Calendar.MONTH, Calendar.FEBRUARY);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        int daysInFeb = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        System.out.println("[LeapYearCheck] year=2024, month=2, days=" + daysInFeb + ", isLeapYear=true");
+        assertEquals("February 2024 should have 29 days", 29, daysInFeb);
+    }
+
+    public void testNonLeapYearFebruaryDays() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, 2023); // 非闰年
+        cal.set(Calendar.MONTH, Calendar.FEBRUARY);
+        cal.set(Calendar.DAY_OF_MONTH, 1);
+        int daysInFeb = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        System.out.println("[LeapYearCheck] year=2023, month=2, days=" + daysInFeb + ", isLeapYear=false");
+        assertEquals("February 2023 should have 28 days", 28, daysInFeb);
+    }
+
+    public void testCalculateMonthlyStreak_LeapYear_FebAllCompleted() {
+        List<ChainEntry> entries = new ArrayList<>();
+        int year = 2024; // 闰年
+        int month = 2;   // 2月
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month - 1, 1, 0, 0, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        // 所有天都完成
+        for (int day = 1; day <= daysInMonth; day++) {
+            cal.set(Calendar.DAY_OF_MONTH, day);
+            entries.add(new ChainEntry(1L, cal.getTime(), true));
+        }
+
+        int monthlyStreak = StreakCalculator.calculateMonthlyStreak(entries, year, month);
+        System.out.println("[MonthlyStreak] year=" + year + ", month=2, days=" + daysInMonth + ", longestStreak=" + monthlyStreak);
+        assertEquals("Leap Feb should yield 29 when all completed", 29, monthlyStreak);
+    }
+
+    public void testCalculateMonthlyStreak_NonLeapYear_FebAllCompleted() {
+        List<ChainEntry> entries = new ArrayList<>();
+        int year = 2023; // 非闰年
+        int month = 2;   // 2月
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month - 1, 1, 0, 0, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        // 所有天都完成
+        for (int day = 1; day <= daysInMonth; day++) {
+            cal.set(Calendar.DAY_OF_MONTH, day);
+            entries.add(new ChainEntry(1L, cal.getTime(), true));
+        }
+
+        int monthlyStreak = StreakCalculator.calculateMonthlyStreak(entries, year, month);
+        System.out.println("[MonthlyStreak] year=" + year + ", month=2, days=" + daysInMonth + ", longestStreak=" + monthlyStreak);
+        assertEquals("Non-leap Feb should yield 28 when all completed", 28, monthlyStreak);
+    }
 }
