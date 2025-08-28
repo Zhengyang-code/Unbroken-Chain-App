@@ -4,7 +4,7 @@ A simple and effective Android application for tracking daily habits and buildin
 
 ## How to use
 
-### main page
+<h2>main page</h2>
 <img src="./HowToUse/main%20page.png" width="300" height="600">
 <p>click Manage Chains go into Chain setting page</p>
 <h2>manage page</h2>
