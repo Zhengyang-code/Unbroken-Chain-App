@@ -200,4 +200,19 @@ public class ChainDatabase extends SQLiteOpenHelper {
             updateEntry(entry);
         }
     }
+
+    public boolean deleteChain(long chainId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rows = db.delete("chains", "id = ?", new String[]{String.valueOf(chainId)});
+        return rows > 0;
+    }
+
+    public boolean updateChain(Chain chain) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name", chain.getName());
+        values.put("description", chain.getDescription());
+        int rows = db.update("chains", values, "id = ?", new String[]{String.valueOf(chain.getId())});
+        return rows > 0;
+    }
 } 

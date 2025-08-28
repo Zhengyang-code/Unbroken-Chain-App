@@ -18,7 +18,9 @@ import com.example.unbrokenchainapp.database.ChainDatabase;
 import com.example.unbrokenchainapp.models.Chain;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChainManagementActivity extends AppCompatActivity {
 
@@ -94,23 +96,22 @@ public class ChainManagementActivity extends AppCompatActivity {
     }
 
     private void showChainOptionsDialog(Chain chain) {
-        String[] options = {"Edit", "Delete", "View Calendar"};
+        Map<String, Runnable> optionActions = new LinkedHashMap<>();
+        optionActions.put("Edit", () -> showEditChainDialog(chain));
+        optionActions.put("Delete", () -> showDeleteChainDialog(chain));
+        optionActions.put("View Calendar", () -> {
+            Intent intent = new Intent(this, CalendarViewActivity.class);
+            intent.putExtra("chain_id", chain.getId());
+            startActivity(intent);
+        });
+
+        String[] options = optionActions.keySet().toArray(new String[0]);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Chain Options");
         builder.setItems(options, (dialog, which) -> {
-            switch (which) {
-                case 0:
-                    showEditChainDialog(chain);
-                    break;
-                case 1:
-                    showDeleteChainDialog(chain);
-                    break;
-                case 2:
-                    Intent intent = new Intent(this, CalendarViewActivity.class);
-                    intent.putExtra("chain_id", chain.getId());
-                    startActivity(intent);
-                    break;
-            }
+            String selectedOption = options[which];
+            optionActions.get(selectedOption).run();
         });
         builder.show();
     }
@@ -139,7 +140,13 @@ public class ChainManagementActivity extends AppCompatActivity {
             chain.setName(name);
             chain.setDescription(description);
             // Note: You would need to add an updateChain method to the database
-            Toast.makeText(this, "Chain updated successfully", Toast.LENGTH_SHORT).show();
+            boolean updated = database.updateChain(chain);
+            if (updated) {
+                Toast.makeText(this, "Chain updated successfully", Toast.LENGTH_SHORT).show();
+                loadChains();
+            } else {
+                Toast.makeText(this, "Failed to update chain", Toast.LENGTH_SHORT).show();
+            }
             loadChains();
         });
         builder.setNegativeButton("Cancel", null);
@@ -153,7 +160,13 @@ public class ChainManagementActivity extends AppCompatActivity {
         builder.setPositiveButton("Delete", (dialog, which) -> {
             chain.setActive(false);
             // Note: You would need to add an updateChain method to the database
-            Toast.makeText(this, "Chain deleted successfully", Toast.LENGTH_SHORT).show();
+            boolean deleted = database.deleteChain(chain.getId());
+            if (deleted) {
+                Toast.makeText(this, "Chain deleted successfully", Toast.LENGTH_SHORT).show();
+                loadChains();
+            } else {
+                Toast.makeText(this, "Failed to delete chain", Toast.LENGTH_SHORT).show();
+            }
             loadChains();
         });
         builder.setNegativeButton("Cancel", null);
