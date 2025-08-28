@@ -1,1 +1,46 @@
+package com.example.unbrokenchainapp.utils;
 
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class MotivationalQuotesTest {
+
+    // Test: getRandomQuote should return a non-null, non-empty string
+    @Test
+    public void testGetRandomQuote() {
+        String quote = MotivationalQuotes.getRandomQuote();
+        assertNotNull(quote);
+        assertFalse(quote.trim().isEmpty());
+    }
+
+    // Test: getStreakQuote should contain the streak number
+    @Test
+    public void testGetStreakQuote() {
+        int streak = 5;
+        String quote = MotivationalQuotes.getStreakQuote(streak);
+        assertNotNull(quote);
+        assertTrue(quote.contains(String.valueOf(streak)));
+    }
+
+    // Test: getBreakQuote should return a valid motivational message
+    @Test
+    public void testGetBreakQuote() {
+        String quote = MotivationalQuotes.getBreakQuote();
+        assertNotNull(quote);
+        assertFalse(quote.trim().isEmpty());
+    }
+
+    // Test: getQuoteForStreak should return correct type based on comparison
+    @Test
+    public void testGetQuoteForStreak_logic() {
+        String streakQuote = MotivationalQuotes.getQuoteForStreak(5, 3);
+        assertTrue(streakQuote.contains("5"));  // Streak increased
+
+        String breakQuote = MotivationalQuotes.getQuoteForStreak(2, 5);
+        assertNotNull(breakQuote);
+        assertFalse(breakQuote.contains("5")); // Streak decreased
+
+        String neutralQuote = MotivationalQuotes.getQuoteForStreak(4, 4);
+        assertNotNull(neutralQuote);  // Should fall back to random quote
+    }
+}
